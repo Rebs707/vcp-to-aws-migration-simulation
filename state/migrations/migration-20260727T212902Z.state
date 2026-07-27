@@ -1,0 +1,5 @@
+migration_id=migration-20260727T212902Z
+status=SUCCESS
+current_step=completed
+updated_at=2026-07-27T21:29:07Z
+log_file=logs/migrations/migration-20260727T212902Z.log
