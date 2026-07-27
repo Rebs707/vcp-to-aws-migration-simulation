@@ -231,3 +231,59 @@ resource "aws_instance" "controller" {
     Role = "Controller"
   }
 }
+
+resource "aws_lb" "controller" {
+  name               = "vcp-controller-alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb.id]
+  subnets            = aws_subnet.public[*].id
+
+  enable_deletion_protection = false
+  drop_invalid_header_fields = true
+
+  tags = {
+    Name = "vcp-controller-alb"
+  }
+}
+
+resource "aws_lb_target_group" "controller" {
+  name        = "vcp-controller-tg"
+  port        = 80
+  protocol    = "HTTP"
+  target_type = "instance"
+  vpc_id      = aws_vpc.main.id
+
+  health_check {
+    enabled             = true
+    path                = "/"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    matcher             = "200"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+
+  tags = {
+    Name = "vcp-controller-target-group"
+  }
+}
+
+resource "aws_lb_target_group_attachment" "controller" {
+  target_group_arn = aws_lb_target_group.controller.arn
+  target_id        = aws_instance.controller.id
+  port             = 80
+}
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.controller.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.controller.arn
+  }
+}
