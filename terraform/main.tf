@@ -138,17 +138,11 @@ resource "aws_security_group" "controller" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port       = 443
-    to_port         = 443
+    description     = "HTTP from the Application Load Balancer"
+    from_port       = 80
+    to_port         = 80
     protocol        = "tcp"
     security_groups = [aws_security_group.alb.id]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["YOUR_IP/32"]
   }
 
   egress {
@@ -163,3 +157,77 @@ resource "aws_security_group" "controller" {
   }
 }
 
+
+data "aws_ssm_parameter" "amazon_linux_2023" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+}
+
+resource "aws_iam_role" "controller" {
+  name = "vcp-controller-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+      Action = "sts:AssumeRole"
+    }]
+  })
+
+  tags = {
+    Name = "vcp-controller-role"
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "controller_ssm" {
+  role       = aws_iam_role.controller.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
+resource "aws_iam_instance_profile" "controller" {
+  name = "vcp-controller-instance-profile"
+  role = aws_iam_role.controller.name
+}
+
+resource "aws_instance" "controller" {
+  ami                         = data.aws_ssm_parameter.amazon_linux_2023.value
+  instance_type               = "t3.micro"
+  subnet_id                   = aws_subnet.private[0].id
+  vpc_security_group_ids      = [aws_security_group.controller.id]
+  iam_instance_profile        = aws_iam_instance_profile.controller.name
+  associate_public_ip_address = false
+
+  user_data = <<-USERDATA
+    #!/bin/bash
+    dnf install -y nginx
+    cat > /usr/share/nginx/html/index.html <<'HTML'
+    <!doctype html>
+    <html>
+      <body>
+        <h1>VCP AWS Controller Simulation</h1>
+        <p>Controller status: healthy</p>
+      </body>
+    </html>
+    HTML
+    systemctl enable nginx
+    systemctl start nginx
+  USERDATA
+
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"
+  }
+
+  root_block_device {
+    encrypted   = true
+    volume_size = 8
+    volume_type = "gp3"
+  }
+
+  tags = {
+    Name = "vcp-simulated-controller"
+    Role = "Controller"
+  }
+}
