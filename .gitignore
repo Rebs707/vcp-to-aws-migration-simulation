@@ -1,0 +1,33 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.tfvars
+*.tfplan
+
+# Crash logs
+crash.log
+
+# Sensitive files
+*.pem
+*.key
+
+# Environment files
+.env
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
