@@ -287,3 +287,68 @@ resource "aws_lb_listener" "http" {
     target_group_arn = aws_lb_target_group.controller.arn
   }
 }
+
+resource "aws_cloudwatch_metric_alarm" "controller_high_cpu" {
+  alarm_name          = "vcp-controller-high-cpu"
+  alarm_description   = "Controller CPU utilization exceeded 80 percent"
+  namespace           = "AWS/EC2"
+  metric_name         = "CPUUtilization"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 2
+  period              = 300
+  statistic           = "Average"
+  threshold           = 80
+  treat_missing_data  = "missing"
+
+  dimensions = {
+    InstanceId = aws_instance.controller.id
+  }
+
+  tags = {
+    Name = "vcp-controller-high-cpu"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "controller_status_check" {
+  alarm_name          = "vcp-controller-status-check-failed"
+  alarm_description   = "Controller EC2 instance or system status check failed"
+  namespace           = "AWS/EC2"
+  metric_name         = "StatusCheckFailed"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  period              = 60
+  statistic           = "Maximum"
+  threshold           = 1
+  treat_missing_data  = "missing"
+
+  dimensions = {
+    InstanceId = aws_instance.controller.id
+  }
+
+  tags = {
+    Name = "vcp-controller-status-check-failed"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "controller_unhealthy_target" {
+  alarm_name          = "vcp-controller-unhealthy-target"
+  alarm_description   = "Application Load Balancer detected an unhealthy controller target"
+  namespace           = "AWS/ApplicationELB"
+  metric_name         = "UnHealthyHostCount"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  period              = 60
+  statistic           = "Maximum"
+  threshold           = 1
+  treat_missing_data  = "missing"
+
+  dimensions = {
+    LoadBalancer = aws_lb.controller.arn_suffix
+    TargetGroup  = aws_lb_target_group.controller.arn_suffix
+  }
+
+  tags = {
+    Name = "vcp-controller-unhealthy-target"
+  }
+}
+
