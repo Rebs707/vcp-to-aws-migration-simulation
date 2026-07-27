@@ -1,0 +1,6 @@
+branch_id=branch-002
+status=FAILED
+current_step=Establish simulated control tunnel
+controller_url=http://controller.internal
+updated_at=2026-07-27T21:31:25Z
+log_file=logs/onboarding/branch-002.log

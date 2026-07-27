@@ -1,0 +1,6 @@
+branch_id=branch-001
+status=SUCCESS
+current_step=completed
+controller_url=http://controller.internal
+updated_at=2026-07-27T21:31:00Z
+log_file=logs/onboarding/branch-001.log
