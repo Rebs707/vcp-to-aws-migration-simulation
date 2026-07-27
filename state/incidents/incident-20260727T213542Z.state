@@ -1,0 +1,9 @@
+incident_id=incident-20260727T213542Z
+incident_type=controller_unreachable
+branch_id=branch-001
+severity=HIGH
+impact=branch_onboarding_blocked
+action=request_console_access
+outcome=RESCHEDULE
+updated_at=2026-07-27T21:35:42Z
+log_file=logs/incidents/incident-20260727T213542Z.log

@@ -1,0 +1,9 @@
+incident_id=incident-20260727T213550Z
+incident_type=rollback_required
+branch_id=branch-001
+severity=CRITICAL
+impact=service_outage
+action=execute_rollback
+outcome=ROLLBACK
+updated_at=2026-07-27T21:35:50Z
+log_file=logs/incidents/incident-20260727T213550Z.log
