@@ -1,25 +1,19 @@
 # Enterprise VCP to AWS Migration Simulation
 
-Enterprise-style simulation of a Versa Controller Platform (VCP) migration to AWS using Infrastructure as Code, automation, observability, validation, and operational runbooks.
-
----
+Enterprise-style simulation of a Versa Controller Platform migration to AWS using Infrastructure as Code, automation, observability, validation, incident simulation, and operational runbooks.
 
 ## Overview
 
-This project simulates a production VCP to AWS migration from planning through post-migration operations.
-
----
+This project simulates a production-style VCP to AWS migration from infrastructure provisioning through post-migration operations and incident recovery.
 
 ## Objectives
 
-- Provision AWS infrastructure with Terraform.
-- Simulate controller migration.
+- Provision AWS infrastructure using Terraform.
+- Simulate controller migration to AWS.
 - Automate branch onboarding.
 - Validate migration success.
 - Simulate production incidents.
-- Document operational procedures.
-
----
+- Document operational recovery procedures.
 
 ## Architecture
 
@@ -32,8 +26,6 @@ This project simulates a production VCP to AWS migration from planning through p
 - Application Load Balancer
 - CloudWatch Monitoring
 
----
-
 ## Migration Workflow
 
 1. Infrastructure Provisioning
@@ -44,45 +36,51 @@ This project simulates a production VCP to AWS migration from planning through p
 6. Incident Response
 7. Operational Recovery
 
----
-
 ## Automation
 
-- Pre-migration validation
-- Migration execution
-- Branch onboarding
-- Post-migration validation
-- Incident simulation
-
----
+- Pre-Migration Validation
+- Migration Execution
+- Branch Onboarding
+- Post-Migration Validation
+- Incident Simulation
 
 ## Incident Scenarios
 
-- Controller unreachable
-- Branch onboarding failure
-- ALB unhealthy
-- Partial connectivity
-- Rollback required
-
----
+- Controller Unreachable
+- Branch Onboarding Failure
+- ALB Unhealthy
+- Partial Connectivity
+- Rollback Required
 
 ## Operational Runbooks
 
-- Pre-migration checks
-- Controller migration
-- Branch onboarding
-- Post-migration validation
-- Controller recovery
-- Rollback procedure
+- Pre-Migration Checks
+- Controller Migration
+- Branch Onboarding
+- Post-Migration Validation
+- Controller Recovery
+- Rollback Procedure
 
----
+## Technology Stack
+
+- AWS
+- Terraform
+- Bash
+- Python
+- Git & GitHub
+- Amazon EC2
+- Application Load Balancer
+- Amazon CloudWatch
+- IAM
+- AWS Systems Manager
 
 ## Repository Structure
 
 ```text
-terraform/
-scripts/
-runbooks/
-logs/
-state/
-README.md
+vcp-to-aws-migration-simulation/
+├── terraform/
+├── scripts/
+├── runbooks/
+├── logs/
+├── state/
+└── README.md
