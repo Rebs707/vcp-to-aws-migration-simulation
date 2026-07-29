@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory documents the simulated legacy enterprise SD-WAN environment before migration to AWS.
+A simulated enterprise SD-WAN environment hosted on an on-premises Versa Controller Platform (VCP).
 
 ## Components
 
@@ -12,6 +12,6 @@ This directory documents the simulated legacy enterprise SD-WAN environment befo
 - TACACS Authentication
 - Existing Routing Policies
 
-## Migration Objective
+## Objective
 
-Migrate the management services from the on-premises Versa Controller Platform (VCP) to AWS while preserving branch connectivity and minimizing operational disruption.
+Migrate management services from the on-premises Versa Controller Platform (VCP) to AWS while preserving branch connectivity.
