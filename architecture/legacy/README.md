@@ -14,4 +14,4 @@ A simulated enterprise SD-WAN environment hosted on an on-premises Versa Control
 
 ## Objective
 
-Migrate management services from the on-premises controller to AWS while preserving branch connectivity.
+Migrate management services from the on-premises Versa Controller Platform (VCP) to AWS while preserving branch connectivity.
