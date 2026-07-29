@@ -8,7 +8,6 @@ This repository simulates an enterprise SD-WAN environment before migration to A
 
 ```mermaid
 flowchart LR
-
     Branch["Branch Office"]
     WAN["Corporate WAN"]
     VCP["Multi-Tenant Versa Controller (VCP)"]
