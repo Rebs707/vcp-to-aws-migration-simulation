@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080e1b">
+<meta name="description" content="Engineering case study by Rabeka Alexander.">
+<title>Project Case Study | Rabeka Alexander</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#080e1b;
+  --surface:#0e1728;
+  --surface2:#121f34;
+  --border:rgba(135,166,210,.16);
+  --text:#edf4ff;
+  --muted:#9aabc3;
+  --blue:#58a6ff;
+  --cyan:#65d9e8;
+  --green:#65d6a2;
+  --max:1120px;
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 85% 0%,rgba(34,92,170,.15),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.75;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.container {
+  width:min(var(--max),calc(100% - 48px));
+  margin:auto;
+}
+
+header {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,14,27,.93);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav {
+  min-height:72px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.logo {
+  font:700 17px "Space Grotesk",sans-serif;
+  letter-spacing:1.3px;
+}
+
+.logo span {color:var(--blue)}
+
+.back-link {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.back-link:hover {color:var(--cyan)}
+
+.hero {
+  padding:105px 0 85px;
+  border-bottom:1px solid var(--border);
+}
+
+.eyebrow {
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+h1,h2,h3 {
+  font-family:"Space Grotesk",sans-serif;
+  line-height:1.25;
+}
+
+.hero h1 {
+  font-size:clamp(38px,6vw,64px);
+  letter-spacing:-2px;
+  max-width:850px;
+  margin-bottom:22px;
+}
+
+.hero h1 span {color:var(--blue)}
+
+.hero-description {
+  color:#bdcbe0;
+  font-size:17px;
+  max-width:760px;
+  margin-bottom:28px;
+}
+
+.meta {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:28px;
+}
+
+.meta span,.tag {
+  padding:7px 12px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  background:rgba(255,255,255,.025);
+  color:#c5d8ef;
+  font-size:11px;
+}
+
+.status {
+  color:var(--green)!important;
+  border-color:rgba(101,214,162,.3)!important;
+}
+
+.button-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.button {
+  display:inline-flex;
+  align-items:center;
+  padding:11px 19px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  font-size:13px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.primary {
+  background:linear-gradient(110deg,#2779d7,#36a9c8);
+  border-color:transparent;
+}
+
+.button:hover {
+  transform:translateY(-2px);
+  border-color:var(--blue);
+}
+
+.layout {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 245px;
+  gap:55px;
+  padding:65px 0;
+  align-items:start;
+}
+
+.content section {
+  padding:0 0 58px;
+  margin-bottom:55px;
+  border-bottom:1px solid var(--border);
+  scroll-margin-top:100px;
+}
+
+.content section:last-child {
+  border-bottom:none;
+}
+
+.section-number {
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+
+.content h2 {
+  font-size:29px;
+  margin-bottom:20px;
+}
+
+.content h3 {
+  font-size:18px;
+  margin:26px 0 12px;
+}
+
+.content p {
+  color:#b7c6db;
+  font-size:14px;
+  margin-bottom:16px;
+}
+
+.content ul,.content ol {
+  padding-left:22px;
+  color:#b7c6db;
+  font-size:14px;
+  margin:12px 0 20px;
+}
+
+.content li {
+  padding:4px 0;
+}
+
+.callout {
+  background:linear-gradient(130deg,rgba(22,50,83,.5),rgba(12,25,44,.7));
+  border:1px solid var(--border);
+  border-left:3px solid var(--blue);
+  border-radius:7px;
+  padding:21px;
+  margin:22px 0;
+}
+
+.callout strong {
+  display:block;
+  color:var(--text);
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.callout p {margin:0}
+
+.diagram {
+  min-height:280px;
+  border:1px dashed rgba(88,166,255,.4);
+  border-radius:10px;
+  background:rgba(88,166,255,.035);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  margin:24px 0;
+}
+
+.diagram-inner {max-width:540px}
+
+.diagram-icon {
+  font-size:34px;
+  color:var(--blue);
+  margin-bottom:12px;
+}
+
+.diagram h3 {margin:0 0 9px}
+
+.diagram p {
+  font-size:13px;
+  margin:0;
+}
+
+.stack {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:20px 0;
+}
+
+.stack span {
+  padding:8px 12px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:5px;
+  font-size:12px;
+  color:#c5d8ef;
+}
+
+.step {
+  display:grid;
+  grid-template-columns:38px 1fr;
+  gap:15px;
+  margin:23px 0;
+}
+
+.step-number {
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(88,166,255,.1);
+  border:1px solid rgba(88,166,255,.3);
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:700;
+}
+
+.step h3 {margin:2px 0 7px}
+
+.step p {margin:0}
+
+.decision-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+  margin-top:20px;
+}
+
+.decision {
+  padding:19px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+.decision h3 {
+  margin:0 0 9px;
+  font-size:15px;
+}
+
+.decision p {
+  font-size:13px;
+  margin:0;
+}
+
+.evidence-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.evidence {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:18px;
+}
+
+.evidence h3 {
+  margin:0 0 8px;
+  font-size:15px;
+}
+
+.evidence p {
+  font-size:13px;
+  margin:0;
+}
+
+.code-placeholder {
+  background:#050a13;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:20px;
+  color:#a9c9ec;
+  font:12px/1.8 monospace;
+  overflow-x:auto;
+  margin:18px 0;
+}
+
+.sidebar {
+  position:sticky;
+  top:105px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:23px;
+}
+
+.sidebar h3 {
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+.sidebar a {
+  display:block;
+  padding:8px 0;
+  color:var(--muted);
+  font-size:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.sidebar a:hover {color:var(--cyan)}
+
+.sidebar a:last-child {border:none}
+
+.project-footer {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:32px;
+  margin-bottom:60px;
+}
+
+.project-footer h2 {
+  font-size:25px;
+  margin-bottom:12px;
+}
+
+.project-footer p {
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+footer {
+  border-top:1px solid var(--border);
+  padding:25px 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.footer-content {
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+@media(max-width:850px) {
+  .layout {grid-template-columns:1fr;gap:0}
+  .sidebar {
+    position:static;
+    order:-1;
+    margin-bottom:45px;
+  }
+  .sidebar nav {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 15px;
+  }
+}
+
+@media(max-width:600px) {
+  .container {width:calc(100% - 32px)}
+  .hero {padding:75px 0 60px}
+  .hero h1 {letter-spacing:-1.5px}
+  .hero-description {font-size:15px}
+  .layout {padding:45px 0}
+  .content h2 {font-size:25px}
+  .decision-grid,.evidence-grid {grid-template-columns:1fr}
+  .sidebar nav {grid-template-columns:1fr}
+  .project-footer {padding:23px}
+  .footer-content {flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="../index.html">RABEKA ALEXANDER<span>.</span></a>
+    <a class="back-link" href="../index.html#engineering">← Engineering Portfolio</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+
+    <div class="eyebrow">ENGINEERING CASE STUDY / CLOUD & AI</div>
+
+    <!-- Replace with the actual project title -->
+    <h1>[Project <span>Name</span>]</h1>
+
+    <!-- Replace with a verified project summary -->
+    <p class="hero-description">
+      [Write a concise description of the engineering problem,
+      the system being developed and its intended purpose.]
+    </p>
+
+    <div class="meta">
+      <span>[Engineering Category]</span>
+      <span>[Primary Technology]</span>
+      <span class="status">[Implemented / Simulated / Experimental]</span>
+    </div>
+
+    <div class="button-row">
+      <a class="button primary" href="#architecture">Explore Architecture ↓</a>
+      <a class="button" href="[GITHUB_REPOSITORY_URL]"
+         target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="container layout">
+
+<article class="content">
+
+  <section id="overview">
+    <div class="section-number">01 / OVERVIEW</div>
+    <h2>Project Overview</h2>
+
+    <p>[Explain what the project does, its intended users,
+    the system boundary and its engineering purpose.]</p>
+
+    <h3>Objectives</h3>
+    <ul>
+      <li>[Objective one]</li>
+      <li>[Objective two]</li>
+      <li>[Objective three]</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Engineering scope</strong>
+      <p>[Clarify what is implemented, what has been validated
+      and what remains outside the current project scope.]</p>
+    </div>
+  </section>
+
+  <section id="problem">
+    <div class="section-number">02 / PROBLEM DEFINITION</div>
+    <h2>Problem Statement</h2>
+
+    <p>[Describe the technical or operational problem that
+    motivated this project.]</p>
+
+    <h3>Engineering Requirements</h3>
+    <ul>
+      <li>[Functional requirement]</li>
+      <li>[Reliability or availability requirement]</li>
+      <li>[Security requirement]</li>
+      <li>[Operational requirement]</li>
+    </ul>
+
+    <h3>Constraints and Assumptions</h3>
+    <p>[Document environment constraints, assumptions,
+    limitations and design boundaries.]</p>
+  </section>
+
+  <section id="architecture">
+    <div class="section-number">03 / SYSTEM DESIGN</div>
+    <h2>Architecture & System Design</h2>
+
+    <p>[Introduce the overall architecture and explain
+    the relationship between the major components.]</p>
+
+    <div class="diagram">
+      <div class="diagram-inner">
+        <div class="diagram-icon">⌘</div>
+        <h3>Architecture Diagram</h3>
+        <p>Replace this placeholder with the verified
+        project architecture diagram.</p>
+        <p style="margin-top:10px">
+          Show components, boundaries, connections,
+          data flows and relevant security controls.
+        </p>
+      </div>
+    </div>
+
+    <h3>Component Breakdown</h3>
+    <ul>
+      <li><strong>[Component A]</strong> — [Its responsibility]</li>
+      <li><strong>[Component B]</strong> — [Its responsibility]</li>
+      <li><strong>[Component C]</strong> — [Its responsibility]</li>
+    </ul>
+
+    <h3>Data and Request Flow</h3>
+    <p>[Explain how requests, data or events move through
+    the architecture, including important trust boundaries.]</p>
+  </section>
+
+  <section id="technology">
+    <div class="section-number">04 / TECHNOLOGY</div>
+    <h2>Technology Stack</h2>
+
+    <p>Technologies actually used in the implementation:</p>
+
+    <div class="stack">
+      <span>[Technology 1]</span>
+      <span>[Technology 2]</span>
+      <span>[Technology 3]</span>
+      <span>[Technology 4]</span>
+      <span>[Technology 5]</span>
+    </div>
+
+    <h3>Technology Selection</h3>
+    <p>[Explain the purpose of the selected technologies
+    and the relevant engineering considerations.]</p>
+  </section>
+
+  <section id="implementation">
+    <div class="section-number">05 / IMPLEMENTATION</div>
+    <h2>Implementation Walkthrough</h2>
+
+    <p>[Describe the implementation in the actual sequence
+    followed by the project.]</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div>
+        <h3>[Implementation Stage One]</h3>
+        <p>[Describe the work performed, relevant files
+        and implementation evidence.]</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div>
+        <h3>[Implementation Stage Two]</h3>
+        <p>[Describe the work performed and how it connects
+        to the overall architecture.]</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div>
+        <h3>[Implementation Stage Three]</h3>
+        <p>[Describe the implementation and verification.]</p>
+      </div>
+    </div>
+
+    <h3>Implementation Evidence</h3>
+    <p>[Add relevant screenshots, configuration examples,
+    code references or deployment evidence.]</p>
+  </section>
+
+  <section id="decisions">
+    <div class="section-number">06 / ENGINEERING JUDGEMENT</div>
+    <h2>Engineering Decisions & Trade-offs</h2>
+
+    <p>Document the reasoning behind important design choices.</p>
+
+    <div class="decision-grid">
+      <div class="decision">
+        <h3>Decision 01</h3>
+        <p>[Chosen approach and the reason for selecting it.]</p>
+      </div>
+
+      <div class="decision">
+        <h3>Decision 02</h3>
+        <p>[Alternative considered and why it was not selected.]</p>
+      </div>
+
+      <div class="decision">
+        <h3>Decision 03</h3>
+        <p>[Security, performance or operational trade-off.]</p>
+      </div>
+
+      <div class="decision">
+        <h3>Decision 04</h3>
+        <p>[Relevant limitation or architectural consideration.]</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="troubleshooting">
+    <div class="section-number">07 / OPERATIONAL ENGINEERING</div>
+    <h2>Failure Scenarios & Fixes</h2>
+
+    <p>[Document genuine implementation failures,
+    their root causes and the fixes applied.]</p>
+
+    <div class="evidence-grid">
+      <div class="evidence">
+        <h3>Failure Scenario</h3>
+        <p>[Observed symptom and affected component.]</p>
+      </div>
+
+      <div class="evidence">
+        <h3>Root Cause</h3>
+        <p>[Evidence-based diagnosis.]</p>
+      </div>
+
+      <div class="evidence">
+        <h3>Resolution</h3>
+        <p>[Fix implemented and relevant configuration changes.]</p>
+      </div>
+
+      <div class="evidence">
+        <h3>Prevention</h3>
+        <p>[Monitoring, validation or engineering improvement
+        to reduce recurrence.]</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="validation">
+    <div class="section-number">08 / TESTING</div>
+    <h2>Testing & Validation</h2>
+
+    <p>[Describe the test approach, environment and
+    acceptance criteria.]</p>
+
+    <h3>Validation Checklist</h3>
+    <ul>
+      <li>[Test case and actual outcome]</li>
+      <li>[Connectivity or integration validation]</li>
+      <li>[Security or permission validation]</li>
+      <li>[Failure and recovery validation]</li>
+    </ul>
+
+    <h3>Evidence</h3>
+    <p>[Include actual test output, screenshots, logs
+    or pipeline results. Distinguish completed tests
+    from tests that are still planned.]</p>
+  </section>
+
+  <section id="results">
+    <div class="section-number">09 / OUTCOMES</div>
+    <h2>Results & Engineering Learnings</h2>
+
+    <p>[Describe what the implementation achieved,
+    supported by actual evidence.]</p>
+
+    <h3>Key Learnings</h3>
+    <ul>
+      <li>[Technical learning]</li>
+      <li>[Architecture learning]</li>
+      <li>[Operational learning]</li>
+    </ul>
+
+    <h3>Limitations and Future Improvements</h3>
+    <p>[Identify known limitations and distinguish
+    proposed improvements from completed work.]</p>
+  </section>
+
+  <section id="documentation">
+    <div class="section-number">10 / SUPPORTING MATERIAL</div>
+    <h2>Source Code & Documentation</h2>
+
+    <ul>
+      <li><a href="[GITHUB_REPOSITORY_URL]">GitHub repository</a></li>
+      <li><a href="[README_URL]">Project README</a></li>
+      <li><a href="[ARCHITECTURE_DOCUMENT_URL]">Architecture documentation</a></li>
+      <li><a href="[ADDITIONAL_DOCUMENTATION_URL]">Supporting documentation</a></li>
+    </ul>
+
+    <p>Only include links that exist and are accessible.</p>
+  </section>
+
+</article>
+
+<aside class="sidebar">
+  <h3>Case Study Contents</h3>
+  <nav>
+    <a href="#overview">01. Overview</a>
+    <a href="#problem">02. Problem</a>
+    <a href="#architecture">03. Architecture</a>
+    <a href="#technology">04. Technology</a>
+    <a href="#implementation">05. Implementation</a>
+    <a href="#decisions">06. Decisions</a>
+    <a href="#troubleshooting">07. Failure & Fixes</a>
+    <a href="#validation">08. Validation</a>
+    <a href="#results">09. Results</a>
+    <a href="#documentation">10. Documentation</a>
+  </nav>
+</aside>
+
+</div>
+
+<div class="container">
+  <div class="project-footer">
+    <div class="eyebrow">ENGINEERING PORTFOLIO</div>
+    <h2>Explore the wider engineering portfolio.</h2>
+    <p>Explore other Cloud Infrastructure, Platform Engineering
+    and Generative AI projects.</p>
+
+    <div class="button-row">
+      <a class="button primary" href="../index.html#engineering">
+        All Engineering Projects
+      </a>
+      <a class="button" href="../index.html#research">
+        Research & Engineering Focus
+      </a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <div>© 2026 Rabeka Alexander. All rights reserved.</div>
+    <div>Cloud Infrastructure · Platform Engineering · AI</div>
+  </div>
+</footer>
+
+</body>
+</html>
